@@ -1,6 +1,7 @@
 form ul {
     display: flex;
-    padding: 20px;
+    padding: 20px 0;
+    gap: 20px;
 }
 
 form h4 {

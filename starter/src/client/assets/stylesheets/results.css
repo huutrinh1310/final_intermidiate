@@ -1,19 +1,34 @@
 /* RESULTS PAGE SPECIFIC STYLES */
+.container-result {
+    padding: 10px;
+}
 
+.results {
+    font-size: 30px;
+    color: black;
+    font-weight: 700;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.results-subtitle {
+    color: #cccccc;
+    font-size: 14px;
+    padding: 10px 0;
+}
+
+.results-link {
+
+}
 /* -------------------  MOBILE  --------------------- */
 
 
 /* -------------------  TABLET  --------------------- */
-@media (min-width: 768px) {
-
-}
+@media (min-width: 768px) {}
 
 /* -------------------  DESKTOP  -------------------- */
 
-@media (min-width: 1224px) {
-}
+@media (min-width: 1224px) {}
 
 /* -------------------  LARGE SCREENS  -------------- */
 
-@media (min-width: 1824px) {
-}
+@media (min-width: 1824px) {}
