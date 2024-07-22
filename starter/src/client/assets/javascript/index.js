@@ -1,6 +1,6 @@
 const cars = [
   {
-    name: "Green racer",
+    name: "Green lightning",
     image:
       "https://cdn.pixabay.com/photo/2023/02/07/17/49/supercar-7774683_1280.jpg",
   },
@@ -92,9 +92,19 @@ async function onPageLoad() {
 }
 
 function setupClickHandlers() {
+  if (!store.track_id || !store.player_id) {
+    document
+      .querySelector("#submit-create-race")
+      .setAttribute("disabled", "true");
+  }
   document.addEventListener(
     "click",
     function (event) {
+      if (store.track_id && store.player_id && !store.race_id) {
+        document
+          .querySelector("#submit-create-race")
+          .removeAttribute("disabled");
+      }
       const { target } = event;
 
       // Race track form field
