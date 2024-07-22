@@ -1,3 +1,61 @@
+const cars = [
+  {
+    name: "Green racer",
+    image:
+      "https://cdn.pixabay.com/photo/2023/02/07/17/49/supercar-7774683_1280.jpg",
+  },
+  {
+    name: "Yellow racer",
+    image:
+      "https://cdn.pixabay.com/photo/2020/11/06/19/09/car-5718685_1280.jpg",
+  },
+  {
+    name: "Purple Racer",
+    image:
+      "https://cdn.pixabay.com/photo/2020/05/05/13/38/corvette-5133147_1280.jpg",
+  },
+  {
+    name: "Red Racer",
+    image:
+      "https://cdn.pixabay.com/photo/2024/02/29/13/03/ai-generated-8604396_1280.png",
+  },
+  {
+    name: "Blue Racer",
+    image:
+      "https://cdn.pixabay.com/photo/2016/02/19/05/58/cars-1208767_1280.jpg",
+  },
+];
+const race_tracks = [
+  {
+    name: "Executioner",
+    image: "https://live.staticflickr.com/2905/14727795194_21e547c95d_b.jpg",
+  },
+  {
+    name: "Sebulba's Legacy",
+    image:
+      "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6419/6419956_sd.jpg;maxHeight=640;maxWidth=550",
+  },
+  {
+    name: "Grabvine Gateway",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx9HkCv4KD2xufbbfu5-lOH0fEMZ8s-gENdQ&s",
+  },
+  {
+    name: "Mountain Run",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGHglCHePAUjygpDCRK9pkZgP0DeC4C3Qytw&s",
+  },
+  {
+    name: "Dark Revenge",
+    image:
+      "https://athlonsports.com/.image/ar_16:9%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkxNDcyMzMzNjU4MDA3MTM4/220058-hungarian-gp-race-recap.jpg",
+  },
+  {
+    name: "The Classic",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR32Lig37Sqqc77kaHx713I-5TTC8Dpoq_REw&s",
+  },
+];
 // PROVIDED CODE BELOW (LINES 1 - 80) DO NOT REMOVE
 
 // The store will hold all information needed globally
@@ -170,14 +228,13 @@ function handleSelectRacer(target) {
 function handleSelectTrack(target) {
   console.log("selected track", target.id);
 
-  // remove class selected from all track options
   const selected = document.querySelector("#tracks .selected");
   if (selected) {
     selected.classList.remove("selected");
   }
 
   // add class selected to current target
-  target.classList.add("selected");
+  target.parentNode.classList.add("selected");
 }
 
 async function handleAccelerate() {
@@ -209,7 +266,11 @@ function renderRacerCard(racer) {
   const { id, driver_name, top_speed, acceleration, handling } = racer;
   // OPTIONAL: There is more data given about the race cars than we use in the game, if you want to factor in top speed, acceleration,
   // and handling to the various vehicles, it is already provided by the API!
-  return `<h4 class="card racer" id="${id}">${driver_name} - ${top_speed}</h3>`;
+  const image = cars.find((item) => item.name === driver_name).image;
+  return `<figure>
+            <img src="${image}" alt="${driver_name}">
+            <figcaption  class="card racer" id="${id}">${driver_name}</figcaption>
+          </figure>`;
 }
 
 function renderTrackCards(tracks) {
@@ -230,8 +291,19 @@ function renderTrackCards(tracks) {
 
 function renderTrackCard(track) {
   const { id, name } = track;
+  const image = race_tracks.find((item) => item.name === name).image;
 
-  return `<h4 id="${id}" class="card track">${name}</h4>`;
+  return `<div id="${id}" class="card-track track">
+  <img id="${id}" src="${image}" alt="${name}" class="card__img card track">
+  <span class="card__footer">
+    <span>${name}</span>
+  </span>
+  <span class="card__action">
+    <svg viewBox="0 0 448 512" title="play">
+      <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z" />
+    </svg>
+  </span>
+</div>`;
 }
 
 function renderCountdown(count) {
@@ -262,6 +334,10 @@ function renderRaceStartView(track) {
 }
 
 function resultsView(positions) {
+  let userPlayer = positions.find((e) => e.id === parseInt(store.player_id));
+  userPlayer.driver_name += " (you)";
+
+  positions = positions.sort((a, b) => (a.segment > b.segment ? -1 : 1));
   let count = 1;
 
   const results = positions.map((p) => {
@@ -278,11 +354,11 @@ function resultsView(positions) {
 		<header>
 			<h1>Race Results</h1>
 		</header>
-		<main>
-			<h3>Race Results</h3>
-			<p>The race is done! Here are the final results:</p>
+		<main class='container-result'>
+			<h3 class='results'>Race Results</h3>
+			<p class='results-subtitle'>The race is done! Here are the final results:</p>
 			${results.join("")}
-			<a href="/race">Start a new race</a>
+			<a href="/race" class='results-link'>Start a new race</a>
 		</main>
 	`;
 }
