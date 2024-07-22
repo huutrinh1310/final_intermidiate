@@ -163,6 +163,8 @@ figcaption.selected~img {
   --blur: 16px;
   --size: clamp(200px, 50vmin, 150px);
   width: var(--size);
+  min-width: 200px;
+  height: 200px;
   aspect-ratio: 4 / 3;
   position: relative;
   border-radius: 2rem;
@@ -229,11 +231,31 @@ figcaption.selected~img {
   --hover: 1;
 }
 
+/* Hide scrollbar but still allow scrolling for elements with the nonscrollbar class */
+.nonscrollbar {
+  overflow: auto;
+  scrollbar-width: none;
+  /* For Firefox */
+  -ms-overflow-style: none;
+  /* For Internet Explorer and Edge */
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+.nonscrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+main {
+  padding: 20px;
+}
+
+
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
   header {
     height: 100vh;
   }
+
 }
 
 /* -------------------  DESKTOP  -------------------- */
@@ -242,6 +264,7 @@ figcaption.selected~img {
   header {
     height: 700px;
   }
+
 }
 
 /* -------------------  LARGE SCREENS  -------------- */
@@ -250,4 +273,5 @@ figcaption.selected~img {
   header {
     height: 700px;
   }
+
 }

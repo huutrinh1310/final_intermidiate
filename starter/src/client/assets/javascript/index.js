@@ -256,16 +256,12 @@ function renderRacerCars(racers) {
   const results = racers.map(renderRacerCard).join("");
 
   return `
-		<ul id="racers">
 			${results}
-		</ul>
 	`;
 }
 
 function renderRacerCard(racer) {
   const { id, driver_name, top_speed, acceleration, handling } = racer;
-  // OPTIONAL: There is more data given about the race cars than we use in the game, if you want to factor in top speed, acceleration,
-  // and handling to the various vehicles, it is already provided by the API!
   const image = cars.find((item) => item.name === driver_name).image;
   return `<figure>
             <img src="${image}" alt="${driver_name}">
@@ -283,9 +279,7 @@ function renderTrackCards(tracks) {
   const results = tracks.map(renderTrackCard).join("");
 
   return `
-		<ul id="tracks">
 			${results}
-		</ul>
 	`;
 }
 

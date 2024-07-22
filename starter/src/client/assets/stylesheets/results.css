@@ -17,18 +17,83 @@
 }
 
 .results-link {
-
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #ccc;
+    padding: 8px 20px;
+    background-color: crimson;
+    display: inline-block;
 }
-/* -------------------  MOBILE  --------------------- */
 
+/* -------------------  MOBILE  --------------------- */
+@media (max-width: 767px) {
+    header {
+        max-height: 200px;
+    }
+    main {
+        padding: 20px;
+    }
+
+    .results {
+        font-size: 24px;
+    }
+
+    .results-subtitle {
+        font-size: 12px;
+    }
+
+    .results-link {
+        font-size: 18px;
+        padding: 6px 16px;
+    }
+}
 
 /* -------------------  TABLET  --------------------- */
-@media (min-width: 768px) {}
+@media (min-width: 768px) and (max-width: 1223px) {
+    .results {
+        font-size: 28px;
+    }
+
+    .results-subtitle {
+        font-size: 13px;
+    }
+
+    .results-link {
+        font-size: 19px;
+        padding: 7px 18px;
+    }
+}
 
 /* -------------------  DESKTOP  -------------------- */
+@media (min-width: 1224px) and (max-width: 1823px) {
+    .results {
+        font-size: 30px;
+    }
 
-@media (min-width: 1224px) {}
+    .results-subtitle {
+        font-size: 14px;
+    }
+
+    .results-link {
+        font-size: 20px;
+        padding: 8px 20px;
+    }
+}
 
 /* -------------------  LARGE SCREENS  -------------- */
+@media (min-width: 1824px) {
+    .results {
+        font-size: 34px;
+    }
 
-@media (min-width: 1824px) {}
+    .results-subtitle {
+        font-size: 16px;
+    }
+
+    .results-link {
+        font-size: 22px;
+        padding: 10px 24px;
+    }
+}
