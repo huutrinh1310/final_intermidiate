@@ -5,10 +5,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/server/index.js"
+    "start": "nodemon src/server/index.js",
+    "dev": "ORIGIN_ALLOWED=http://localhost:3000 ./bin/server-windows-amd64.exe"
   },
   "dependencies": {
     "body-parser": "1.20.0",
+    "cors": "^2.8.5",
     "express": "4.18.2",
     "http-proxy-middleware": "2.0.6",
     "node-fetch": "2.7.0",

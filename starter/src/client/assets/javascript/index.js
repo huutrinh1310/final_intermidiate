@@ -100,11 +100,6 @@ function setupClickHandlers() {
   document.addEventListener(
     "click",
     function (event) {
-      if (store.track_id && store.player_id && !store.race_id) {
-        document
-          .querySelector("#submit-create-race")
-          .removeAttribute("disabled");
-      }
       const { target } = event;
 
       // Race track form field
@@ -126,12 +121,20 @@ function setupClickHandlers() {
         event.preventDefault();
 
         // start race
-        handleCreateRace();
+        handleCreateRace().then((item) => (store.race_id = item));
       }
 
       // Handle acceleration click
       if (target.matches("#gas-peddle")) {
         handleAccelerate();
+      }
+
+      if (store.track_id && store.player_id && !store.race_id) {
+        document.querySelector("#submit-create-race")
+          ? document
+              .querySelector("#submit-create-race")
+              .removeAttribute("disabled")
+          : null;
       }
 
       console.log("Store updated :: ", store);
@@ -160,18 +163,15 @@ async function handleCreateRace() {
   renderAt("#race", renderRaceStartView(store.track_name));
   const race = await createRace(store.player_id, store.player_id);
   console.log("RACE: ", race);
-  await getRace(race.ID);
-  store.race_id = race.ID;
+  store.race_id = parseInt(race.ID - 1);
 
-  // The race has been created, now start the countdown
-  // TODO - call the async function runCountdown
-  await runCountdown().then(async () => await startRace(race.ID));
-
-  // TODO - call the async function startRace
-  // TIP - remember to always check if a function takes parameters before calling it!
-
-  // TODO - call the async function runRace
-  await runRace(race.ID);
+  try {
+    await runCountdown().then(async () => await startRace(store.race_id));
+    await runRace(store.race_id);
+    return store.race_id;
+  } catch (err) {
+    console.log("Error-->", err.message);
+  }
 }
 
 function runRace(raceID) {
